@@ -1,0 +1,27 @@
+<?php 
+/* UTM_PAD:
+   von zwei in der Funktion getrimmten Strings erhält der kürzere die überzähligen ersten Zeichen 
+   des anderen vorangestellt. 
+   
+   32UND1965
+          77
+------------
+   23UND1977
+   
+ */
+
+function UTM_Pad(&$Pos1,&$Pos2) {
+$Pos1=trim($Pos1);   $Pos2=trim($Pos2);
+$Len1=strlen($Pos1); $Len2=strlen($Pos2);
+$Fall=sgn($Len1-$Len2);
+switch($Fall) {
+ case 1:
+  $Pos2=substr($Pos1,0,$Len1-$Len2).$Pos2;
+  break;
+ case -1:
+  $Pos1=substr($Pos2,0,$Len2-$Len1).$Pos1;
+  break;
+ }
+return $Fall;
+}
+?>
